@@ -2981,8 +2981,8 @@ exports = module.exports = HTML;
 
 var statsTemplate = '<ul id="mocha-stats">'
   + '<li class="progress"><canvas width="40" height="40"></canvas></li>'
-  + '<li class="passes"><a href="javascript:void(0);">passes:</a> <em>0</em></li>'
-  + '<li class="failures"><a href="javascript:void(0);">failures:</a> <em>0</em></li>'
+  + '<li class="passes"><a href="#">passes:</a> <em>0</em></li>'
+  + '<li class="failures"><a href="#">failures:</a> <em>0</em></li>'
   + '<li class="duration">duration: <em>0</em>s</li>'
   + '</ul>';
 
@@ -3088,34 +3088,23 @@ function HTML(runner) {
       var el = fragment('<li class="test pass pending"><h2>%e</h2></li>', test.title);
     } else {
       var el = fragment('<li class="test fail"><h2>%e <a href="%e" class="replay">‣</a></h2></li>', test.title, self.testURL(test));
-      var stackString, // Note: Includes leading newline
-          message = test.err.toString();
+      var str = test.err.stack || test.err.toString();
+
+      // FF / Opera do not add the message
+      if (!~str.indexOf(test.err.message)) {
+        str = test.err.message + '\n' + str;
+      }
 
       // <=IE7 stringifies to [Object Error]. Since it can be overloaded, we
       // check for the result of the stringifying.
-      if ('[object Error]' === message) message = test.err.message;
+      if ('[object Error]' == str) str = test.err.message;
 
-      if (test.err.stack) {
-        var indexOfMessage = test.err.stack.indexOf(test.err.message);
-        if (indexOfMessage === -1) {
-          stackString = test.err.stack;
-        } else {
-          stackString = test.err.stack.substr(test.err.message.length + indexOfMessage);
-        }
-      } else if (test.err.sourceURL && test.err.line !== undefined) {
-        // Safari doesn't give you a stack. Let's at least provide a source line.
-        stackString = "\n(" + test.err.sourceURL + ":" + test.err.line + ")";
+      // Safari doesn't give you a stack. Let's at least provide a source line.
+      if (!test.err.stack && test.err.sourceURL && test.err.line !== undefined) {
+        str += "\n(" + test.err.sourceURL + ":" + test.err.line + ")";
       }
 
-      stackString = stackString || '';
-
-      if (test.err.htmlMessage && stackString) {
-        el.appendChild(fragment('<div class="html-error">%s\n<pre class="error">%e</pre></div>', test.err.htmlMessage, stackString));
-      } else if (test.err.htmlMessage) {
-        el.appendChild(fragment('<div class="html-error">%s</div>', test.err.htmlMessage));
-      } else {
-        el.appendChild(fragment('<pre class="error">%e%e</pre>', message, stackString));
-      }
+      el.appendChild(fragment('<pre class="error">%e</pre>', str));
     }
 
     // toggle code
@@ -3467,7 +3456,6 @@ function List(runner) {
   runner.on('fail', function(test, err){
     test = clean(test);
     test.err = err.message;
-    test.stack = err.stack || null;
     console.log(JSON.stringify(['fail', test]));
   });
 
@@ -4824,6 +4812,9 @@ Runnable.prototype.run = function(fn){
     var ms = self.timeout();
     if (self.timedOut) return;
     if (finished) return multiple(err || self._trace);
+
+    // Discard the resolution if this test has already failed asynchronously
+    if (self.state) return;
 
     self.clearTimeout();
     self.duration = new Date - start;
@@ -6681,7 +6672,7 @@ exports.stackTraceFilter = function() {
       : { browser: true }
     , cwd = is.node
       ? process.cwd() + slash
-      : (typeof location === 'undefined' ? window.location : location).href.replace(/\/[^\/]*$/, '/');
+      : location.href.replace(/\/[^\/]*$/, '/');
 
   function isNodeModule (line) {
     return (~line.indexOf('node_modules'));
