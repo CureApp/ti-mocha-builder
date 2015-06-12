@@ -1,4 +1,14 @@
 ;(function(){
+(function () {
+
+  var global = (function () { return this; })();
+
+  // stub location and document that mocha uses
+  global.location = {};
+  global.location.href = '';
+  global.document = {}
+
+}());
 
 // CommonJS require()
 
@@ -6834,6 +6844,261 @@ mocha.run = function(fn){
  */
 
 Mocha.process = process;
+require.register("reporters/ti-json.js", function(module, exports, require){
+
+/**
+ * Module dependencies.
+ */
+
+var Base = require('./base'),
+  cursor = require('titanium/util').cursor,
+  color = Base.color;
+
+/**
+ * Expose `JSON`.
+ */
+
+exports = module.exports = TiJSONReporter;
+
+/**
+ * Initialize a new `TiJSON` reporter.
+ *
+ * @param {Runner} runner
+ * @api public
+ */
+
+function TiJSONReporter(runner) {
+  var self = this;
+  Base.call(this, runner);
+
+  var tests = [],
+    failures = [],
+    passes = [];
+
+  runner.on('test end', function(test){
+    tests.push(test);
+  });
+
+  runner.on('pass', function(test){
+    passes.push(test);
+  });
+
+  runner.on('fail', function(test){
+    failures.push(test);
+  });
+
+  runner.on('end', function(){
+    var obj = {
+      stats: self.stats,
+      tests: tests.map(clean),
+      failures: failures.map(clean),
+      passes: passes.map(clean)
+    };
+
+    console.log(cursor.resetLine + JSON.stringify(obj, null, 2));
+    runner.results = obj;
+  });
+}
+
+/**
+ * Return a plain-object representation of `test`
+ * free of cyclic properties etc.
+ *
+ * @param {Object} test
+ * @return {Object}
+ * @api private
+ */
+
+function clean(test) {
+  return {
+    title: test.title,
+    fullTitle: test.fullTitle(),
+    duration: test.duration
+  };
+}
+}); // module: reporters/ti-json.js
+// Create a titanium compatible reporter based on spec
+require.register("reporters/ti-spec-studio.js", function(module, exports, require){
+
+	/**
+	 * Module dependencies.
+	 */
+
+	var Base = require('./base'),
+		cursor = require('titanium/util').cursor;
+
+	/**
+	 * Expose `TiSpecStudio`.
+	 */
+
+	exports = module.exports = TiSpecStudio;
+
+	/**
+	 * Initialize a new `TiSpecStudio` test reporter.
+	 *
+	 * @param {Runner} runner
+	 * @api public
+	 */
+
+	function TiSpecStudio(runner) {
+		Base.call(this, runner);
+
+		var self = this,
+			stats = this.stats,
+			indents = 0,
+			n = 0;
+
+		function NL() {
+			Ti.API.info(cursor.reset + ' ' + cursor.reset);
+		}
+
+		function indent() {
+			return cursor.reset + new Array(indents).join('  ') + cursor.reset;
+		}
+
+		runner.on('start', function(){
+			NL();
+		});
+
+		runner.on('suite', function(suite){
+			++indents;
+			Ti.API.info(indent() + suite.title);
+		});
+
+		runner.on('suite end', function(suite){
+			--indents;
+			if (1 === indents) { NL(); }
+		});
+
+		runner.on('pending', function(test){
+			Ti.API.warn(indent() + '  - ' + test.title + ' (pending)');
+		});
+
+		runner.on('pass', function(test){
+			if ('fast' === test.speed) {
+				Ti.API.info(indent() + '  + ' + test.title);
+			} else {
+				Ti.API.info(indent() + '  + ' + test.title + ' (' + test.duration + 'ms)');
+			}
+		});
+
+		runner.on('fail', function(test, err){
+			Ti.API.error(indent() + '  ' + (++n) + ') ' + test.title);
+		});
+
+		runner.on('end', function() {
+			self.epilogue();
+		});
+	}
+
+	/**
+	 * Inherit from `Base.prototype`.
+	 */
+
+	function F(){}
+	F.prototype = Base.prototype;
+	TiSpecStudio.prototype = new F();
+	TiSpecStudio.prototype.constructor = TiSpecStudio;
+
+}); // module: reporters/ti-spec-studio.js
+// Create a titanium compatible reporter based on spec
+require.register("reporters/ti-spec.js", function(module, exports, require){
+
+	/**
+	 * Module dependencies.
+	 */
+
+	var Base = require('./base'),
+		cursor = require('titanium/util').cursor,
+		color = Base.color;
+
+	/**
+	 * Expose `TiSpec`.
+	 */
+
+	exports = module.exports = TiSpec;
+
+	/**
+	 * Initialize a new `TiSpec` test reporter.
+	 *
+	 * @param {Runner} runner
+	 * @api public
+	 */
+
+	function TiSpec(runner) {
+		Base.call(this, runner);
+
+		var self = this,
+			stats = this.stats,
+			indents = 0,
+			n = 0;
+
+		function NL() {
+			log(cursor.reset + ' ' + cursor.reset);
+		}
+
+		function upOne() {
+			return cursor.previousLine + cursor.resetLine;
+		}
+
+		function indent() {
+			return new Array(indents).join('  ');
+		}
+
+		function log(msg) {
+			console.log(cursor.resetLine + msg);
+		}
+
+		runner.on('start', function(){
+			NL();
+		});
+
+		runner.on('suite', function(suite){
+			++indents;
+			log(color('suite', indent() + suite.title));
+		});
+
+		runner.on('suite end', function(suite){
+			--indents;
+			if (1 === indents) { NL(); }
+		});
+
+		runner.on('test', function(test){
+			log(color('pass', indent() + '  o ' + test.title + ': '));
+		});
+
+		runner.on('pending', function(test){
+			log(color('pending', indent() + '  - ' + test.title));
+		});
+
+		runner.on('pass', function(test){
+			if ('fast' === test.speed) {
+				log(upOne() + color('checkmark', indent() + '  +') + color('pass', ' ' + test.title + ' '));
+			} else {
+				log(upOne() + color('checkmark', indent() + '  +') + color('pass', ' ' + test.title + ' ') +
+					color(test.speed, '(' + test.duration + 'ms)'));
+			}
+		});
+
+		runner.on('fail', function(test, err){
+			log(color('fail', upOne() + indent() + '  ' + (++n) + ') ' + test.title));
+		});
+
+		runner.on('end', function() {
+			self.epilogue();
+		});
+	}
+
+	/**
+	 * Inherit from `Base.prototype`.
+	 */
+
+	function F(){}
+	F.prototype = Base.prototype;
+	TiSpec.prototype = new F();
+	TiSpec.prototype.constructor = TiSpec;
+
+}); // module: reporters/ti-spec.js
 
 require.register("titanium/util.js", function(module, exports, require){
 
@@ -7210,9 +7475,6 @@ require.register("titanium/util.js", function(module, exports, require){
   }
 
 });
-// stub location that mocha uses
-global.location = {};
-
 // reset the suites each time mocha is run
 var _mochaRun = mocha.run;
 mocha.run = function(fn) {
@@ -7278,6 +7540,7 @@ function createConsoleLogger(type) {
 for (var i = 0; i < types.length; i++) {
 	createConsoleLogger(types[i]);
 }
+
 
 // set the ti-spec reporter by default
 mocha.setup({
