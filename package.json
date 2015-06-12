@@ -32,7 +32,7 @@
     "grunt-contrib-jshint": "~0.7.2",
     "grunt-mocha-test": "~0.8.1",
     "grunt-titanium": "^0.2.0",
-    "mocha": "1.21.5",
+    "mocha": "2.2.5",
     "should": "~2.1.1",
     "wrench": "~1.5.4"
   },
