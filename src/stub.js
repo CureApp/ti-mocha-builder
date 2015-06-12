@@ -6,5 +6,6 @@
   global.location = {};
   global.location.href = '';
   global.document = {}
+  global.document.getElementById = function () { return false; };
 
 }());
