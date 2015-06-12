@@ -19,8 +19,8 @@ mocha/_mocha.js: mocha/node_modules
 
 ti-mocha.js: mocha/_mocha.js
 	cat \
-      src/mocha.LICENSE \
       LICENSE \
+      src/mocha.LICENSE \
 	  mocha/support/head.js \
 	  $(TI_STUB) \
 	  mocha/_mocha.js \
