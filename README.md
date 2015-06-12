@@ -1,41 +1,33 @@
-# ti-mocha [![Appcelerator Titanium](http://www-static.appcelerator.com/badges/titanium-git-badge-sq.png)](http://www.appcelerator.com/titanium/)
+# ti-mocha-builder [![Appcelerator Titanium](http://www-static.appcelerator.com/badges/titanium-git-badge-sq.png)](http://www.appcelerator.com/titanium/)
 
-Simple and reliable support for [mocha](https://github.com/visionmedia/mocha) testing with Appcelerator's [Titanium](http://www.appcelerator.com/titanium/) SDK.
+> The builder of ti-mocha.js
 
-## Full Documentation and Samples
+[ti-mocha](https://github.com/tonylukasavage/ti-mocha) is the mocha test runner for Titanium. Its documentation is available [here](http://tonylukasavage.com/ti-mocha/).
 
-[http://tonylukasavage.com/ti-mocha/](http://tonylukasavage.com/ti-mocha/)
+This repository is a fork of the original ti-mocha and reimplemented the build process. You can bundle any version of mocha into ti-mocha.
 
-## Quick Start [![NPM version](https://badge.fury.io/js/ti-mocha.png)](http://badge.fury.io/js/ti-mocha)
+(README of original ti-mocha says it can change mocha version, but actual build process doesn't seem to work.)
 
-```
-cd /path/to/Titanium/project && npm install ti-mocha --prefix ./node_modules
-```
+# Usage
 
-## Contributing [![Build Status](https://travis-ci.org/tonylukasavage/ti-mocha.png?branch=master)](https://travis-ci.org/tonylukasavage/ti-mocha) [![Built with Grunt](https://cdn.gruntjs.com/builtwith.png)](http://gruntjs.com/)
+In the top of project,
 
-1. Install [node.js](http://nodejs.org/).
-2. Install [grunt](http://gruntjs.com/): `[sudo] npm install -g grunt-cli`
-3. `git clone https://github.com/tonylukasavage/ti-mocha.git && cd ti-mocha && npm install`
-
-#### Basic Build
-
-```
-grunt
+```sh
+make clean all
 ```
 
-This process will generate a new `./ti-mocha.js` file based on the files in `src`, as well as the source mocha.js file found at `./node_modules/mocha/mocha.js` after you execute `npm install`. See [lib/build.js](lib/build.js) for details of the build process. Please note that _no_ modifications are made directly to the source mocha.js file.
+This makes ti-mocha.js to the current directory.
 
-#### Build for Different Version of Mocha
+### Change mocha version
 
-1. Change version of mocha in the package.json `devDependencies`
-2. `npm install`
-3. `grunt`
+```sh
+git submodule update --init # you need to do this only once.
+cd mocha
+git checkout 2.2.3
+cd ..
+make clean all # this makes ti-mocha with mocha version 2.2.3
+```
 
-## Issues
+# LICENSE
 
-Please report issues, new features/reporters, or requests in this repo's [issue tracker](https://github.com/tonylukasavage/ti-mocha/issues). Bear in mind that this is a straight-up, minimal porting effort to make mocha work with Titanium. If you want additional features or functionality in mocha itself, please report them in the [mocha](https://github.com/visionmedia/mocha) repository.
-
-## License
-
-Distributed under [MIT License](LICENSE).
+MIT

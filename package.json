@@ -1,7 +1,7 @@
 {
   "name": "ti-mocha-builder",
   "version": "0.1.0",
-  "description": "Simple and reliable support for mocha testing with Appcelerator's Titanium SDK",
+  "description": "The builder of ti-mocha.js",
   "keywords": [
     "mocha",
     "testing",
@@ -11,11 +11,11 @@
     "alloy",
     "unit test"
   ],
-  "homepage": "https://github.com/kt3k/ti-mocha-builder",
+  "homepage": "https://github.com/CureApp/ti-mocha-builder",
   "license": "MIT",
   "author": {
-    "name": "Yoshiya Hinosawa",
-    "url": "https://github.com/kt3k"
+    "name": "CureApp, Inc.",
+    "url": "http://www.cureapp.jp/"
   },
   "main": "./ti-mocha.js",
   "scripts": {
@@ -23,7 +23,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/kt3k/ti-mocha-builder.git"
+    "url": "git://github.com/CureApp/ti-mocha-builder.git"
   },
   "devDependencies": {
     "acorn": "~0.4.2",
