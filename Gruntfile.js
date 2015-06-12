@@ -1,7 +1,5 @@
-var build = require('./lib/build'),
-  C = require('./lib/constants'),
-  fs = require('fs'),
-  path = require('path');
+var fs = require('fs');
+var path = require('path');
 
 module.exports = function(grunt) {
 
@@ -38,18 +36,6 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('grunt-titanium');
-
-  // run build
-  grunt.registerTask('_build', 'finalize ti-mocha.js release file', function() {
-    grunt.log.write('Reading build ti-mocha.js...');
-    var contents = fs.readFileSync(C.BUILD_FILE, 'utf8');
-    grunt.log.ok();
-
-    grunt.log.write('Copying "' + path.relative('.', C.BUILD_FILE) + '" to "' + path.relative('.', C.RELEASE_FILE) + '"...');
-    fs.writeFileSync(C.RELEASE_FILE, contents);
-    fs.chmodSync(C.RELEASE_FILE, fs.lstatSync(C.BUILD_FILE).mode);
-    grunt.log.ok();
-  });
 
   // lint and test node and titanium
   grunt.registerTask('test', ['clean', 'mochaTest']);

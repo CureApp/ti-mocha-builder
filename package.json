@@ -1,6 +1,6 @@
 {
-  "name": "ti-mocha",
-  "version": "0.2.0",
+  "name": "ti-mocha-builder",
+  "version": "0.1.0",
   "description": "Simple and reliable support for mocha testing with Appcelerator's Titanium SDK",
   "keywords": [
     "mocha",
@@ -11,25 +11,19 @@
     "alloy",
     "unit test"
   ],
-  "homepage": "http://tonylukasavage.com/ti-mocha/",
-  "bugs": {
-    "url": "https://github.com/tonylukasavage/ti-mocha/issues",
-    "email": "anthony.lukasavage@gmail.com"
-  },
+  "homepage": "https://github.com/kt3k/ti-mocha-builder",
   "license": "MIT",
   "author": {
-    "name": "Tony Lukasavage",
-    "email": "anthony.lukasavage@gmail.com",
-    "url": "http://tonylukasavage.com"
+    "name": "Yoshiya Hinosawa",
+    "url": "https://github.com/kt3k"
   },
   "main": "./ti-mocha.js",
   "scripts": {
-    "test": "grunt test",
-    "install": "node ./lib/install.js"
+    "test": "grunt test"
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/tonylukasavage/ti-mocha.git"
+    "url": "git://github.com/kt3k/ti-mocha-builder.git"
   },
   "devDependencies": {
     "acorn": "~0.4.2",
