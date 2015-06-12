@@ -7,23 +7,16 @@ TI_MAIN=src/util.js src/main.js
 
 all: ti-mocha.js
 
-mocha/node_modules/diff/diff.js:
+mocha/node_modules:
 	cd mocha ; npm install
 
-mocha/node_modules/escape-string-regexp/index.js:
-	cd mocha ; npm install
+mocha/_mocha.js: mocha/node_modules
+	cd mocha ; make clean all
 
-mocha/lib/browser/diff.js: mocha/node_modules/diff/diff.js
-	cp mocha/node_modules/diff/diff.js mocha/lib/browser/diff.js
-
-mocha/lib/browser/escape-string-regexp.js: mocha/node_modules/escape-string-regexp/index.js
-	cp mocha/node_modules/escape-string-regexp/index.js mocha/lib/browser/escape-string-regexp.js
-
-ti-mocha.js: $(SRC) $(SUPPORT) $(TI_REPORTERS) $(TI_MAIN) mocha/lib/browser/diff.js mocha/lib/browser/escape-string-regexp.js
-	node mocha/support/compile $(SRC)
+ti-mocha.js: mocha/_mocha.js
 	cat \
 	  mocha/support/head.js \
-	  _mocha.js \
+	  mocha/_mocha.js \
 	  mocha/support/tail.js \
 	  $(TI_REPORTERS) \
 	  $(TI_MAIN) \
@@ -31,4 +24,5 @@ ti-mocha.js: $(SRC) $(SUPPORT) $(TI_REPORTERS) $(TI_MAIN) mocha/lib/browser/diff
 	  > ti-mocha.js
 
 clean:
+	rm -f mocha/_mocha.js
 	rm -f ti-mocha.js
