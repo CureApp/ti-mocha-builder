@@ -1,6 +1,3 @@
-// stub location that mocha uses
-global.location = {};
-
 // reset the suites each time mocha is run
 var _mochaRun = mocha.run;
 mocha.run = function(fn) {
@@ -66,6 +63,7 @@ function createConsoleLogger(type) {
 for (var i = 0; i < types.length; i++) {
 	createConsoleLogger(types[i]);
 }
+
 
 // set the ti-spec reporter by default
 mocha.setup({
