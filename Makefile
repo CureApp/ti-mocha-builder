@@ -8,6 +8,9 @@ TI_MAIN=src/util.js src/main.js
 
 all: ti-mocha.js
 
+mocha:
+	git submodule update --init
+
 mocha/node_modules:
 	cd mocha ; npm install
 
@@ -16,6 +19,8 @@ mocha/_mocha.js: mocha/node_modules
 
 ti-mocha.js: mocha/_mocha.js
 	cat \
+      src/mocha.LICENSE \
+      LICENSE \
 	  mocha/support/head.js \
 	  $(TI_STUB) \
 	  mocha/_mocha.js \
