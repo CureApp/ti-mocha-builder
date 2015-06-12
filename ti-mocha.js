@@ -47,15 +47,15 @@ require.relative = function (parent) {
   };
 
 
-require.register("mocha/browser/debug.js", function(module, exports, require){
+require.register("browser/debug.js", function(module, exports, require){
 module.exports = function(type){
   return function(){
   }
 };
 
-}); // module: mocha/browser/debug.js
+}); // module: browser/debug.js
 
-require.register("mocha/browser/diff.js", function(module, exports, require){
+require.register("browser/diff.js", function(module, exports, require){
 /* See LICENSE file for terms of use */
 
 /*
@@ -676,9 +676,9 @@ require.register("mocha/browser/diff.js", function(module, exports, require){
   }
 }(this));
 
-}); // module: mocha/browser/diff.js
+}); // module: browser/diff.js
 
-require.register("mocha/browser/escape-string-regexp.js", function(module, exports, require){
+require.register("browser/escape-string-regexp.js", function(module, exports, require){
 'use strict';
 
 var matchOperatorsRe = /[|\\{}()[\]^$+*?.]/g;
@@ -691,9 +691,9 @@ module.exports = function (str) {
   return str.replace(matchOperatorsRe,  '\\$&');
 };
 
-}); // module: mocha/browser/escape-string-regexp.js
+}); // module: browser/escape-string-regexp.js
 
-require.register("mocha/browser/events.js", function(module, exports, require){
+require.register("browser/events.js", function(module, exports, require){
 /**
  * Module exports.
  */
@@ -872,21 +872,21 @@ EventEmitter.prototype.emit = function (name) {
   return true;
 };
 
-}); // module: mocha/browser/events.js
+}); // module: browser/events.js
 
-require.register("mocha/browser/fs.js", function(module, exports, require){
+require.register("browser/fs.js", function(module, exports, require){
 
-}); // module: mocha/browser/fs.js
+}); // module: browser/fs.js
 
-require.register("mocha/browser/glob.js", function(module, exports, require){
+require.register("browser/glob.js", function(module, exports, require){
 
-}); // module: mocha/browser/glob.js
+}); // module: browser/glob.js
 
-require.register("mocha/browser/path.js", function(module, exports, require){
+require.register("browser/path.js", function(module, exports, require){
 
-}); // module: mocha/browser/path.js
+}); // module: browser/path.js
 
-require.register("mocha/browser/progress.js", function(module, exports, require){
+require.register("browser/progress.js", function(module, exports, require){
 /**
  * Expose `Progress`.
  */
@@ -1013,9 +1013,9 @@ Progress.prototype.draw = function(ctx){
   return this;
 };
 
-}); // module: mocha/browser/progress.js
+}); // module: browser/progress.js
 
-require.register("mocha/browser/tty.js", function(module, exports, require){
+require.register("browser/tty.js", function(module, exports, require){
 exports.isatty = function(){
   return true;
 };
@@ -1029,9 +1029,9 @@ exports.getWindowSize = function(){
   }
 };
 
-}); // module: mocha/browser/tty.js
+}); // module: browser/tty.js
 
-require.register("mocha/context.js", function(module, exports, require){
+require.register("context.js", function(module, exports, require){
 /**
  * Expose `Context`.
  */
@@ -1128,9 +1128,9 @@ Context.prototype.inspect = function(){
   }, 2);
 };
 
-}); // module: mocha/context.js
+}); // module: context.js
 
-require.register("mocha/hook.js", function(module, exports, require){
+require.register("hook.js", function(module, exports, require){
 /**
  * Module dependencies.
  */
@@ -1184,9 +1184,9 @@ Hook.prototype.error = function(err){
   this._error = err;
 };
 
-}); // module: mocha/hook.js
+}); // module: hook.js
 
-require.register("mocha/interfaces/bdd.js", function(module, exports, require){
+require.register("interfaces/bdd.js", function(module, exports, require){
 /**
  * Module dependencies.
  */
@@ -1303,9 +1303,9 @@ module.exports = function(suite){
   });
 };
 
-}); // module: mocha/interfaces/bdd.js
+}); // module: interfaces/bdd.js
 
-require.register("mocha/interfaces/common.js", function(module, exports, require){
+require.register("interfaces/common.js", function(module, exports, require){
 /**
  * Functions common to more than one interface
  * @module lib/interfaces/common
@@ -1365,9 +1365,9 @@ module.exports = function (suites, context) {
   }
 };
 
-}); // module: mocha/interfaces/common.js
+}); // module: interfaces/common.js
 
-require.register("mocha/interfaces/exports.js", function(module, exports, require){
+require.register("interfaces/exports.js", function(module, exports, require){
 /**
  * Module dependencies.
  */
@@ -1430,17 +1430,17 @@ module.exports = function(suite){
   }
 };
 
-}); // module: mocha/interfaces/exports.js
+}); // module: interfaces/exports.js
 
-require.register("mocha/interfaces/index.js", function(module, exports, require){
+require.register("interfaces/index.js", function(module, exports, require){
 exports.bdd = require('./bdd');
 exports.tdd = require('./tdd');
 exports.qunit = require('./qunit');
 exports.exports = require('./exports');
 
-}); // module: mocha/interfaces/index.js
+}); // module: interfaces/index.js
 
-require.register("mocha/interfaces/qunit.js", function(module, exports, require){
+require.register("interfaces/qunit.js", function(module, exports, require){
 /**
  * Module dependencies.
  */
@@ -1536,9 +1536,9 @@ module.exports = function(suite){
   });
 };
 
-}); // module: mocha/interfaces/qunit.js
+}); // module: interfaces/qunit.js
 
-require.register("mocha/interfaces/tdd.js", function(module, exports, require){
+require.register("interfaces/tdd.js", function(module, exports, require){
 /**
  * Module dependencies.
  */
@@ -1649,9 +1649,9 @@ module.exports = function(suite){
   });
 };
 
-}); // module: mocha/interfaces/tdd.js
+}); // module: interfaces/tdd.js
 
-require.register("mocha/mocha.js", function(module, exports, require){
+require.register("mocha.js", function(module, exports, require){
 /*!
  * mocha
  * Copyright(c) 2011 TJ Holowaychuk <tj@vision-media.ca>
@@ -2099,9 +2099,9 @@ Mocha.prototype.run = function(fn){
   return runner.run(done);
 };
 
-}); // module: mocha/mocha.js
+}); // module: mocha.js
 
-require.register("mocha/ms.js", function(module, exports, require){
+require.register("ms.js", function(module, exports, require){
 /**
  * Helpers.
  */
@@ -2212,9 +2212,9 @@ function plural(ms, n, name) {
   return Math.ceil(ms / n) + ' ' + name + 's';
 }
 
-}); // module: mocha/ms.js
+}); // module: ms.js
 
-require.register("mocha/pending.js", function(module, exports, require){
+require.register("pending.js", function(module, exports, require){
 
 /**
  * Expose `Pending`.
@@ -2232,9 +2232,9 @@ function Pending(message) {
     this.message = message;
 }
 
-}); // module: mocha/pending.js
+}); // module: pending.js
 
-require.register("mocha/reporters/base.js", function(module, exports, require){
+require.register("reporters/base.js", function(module, exports, require){
 /**
  * Module dependencies.
  */
@@ -2702,9 +2702,9 @@ function sameType(a, b) {
   return a == b;
 }
 
-}); // module: mocha/reporters/base.js
+}); // module: reporters/base.js
 
-require.register("mocha/reporters/doc.js", function(module, exports, require){
+require.register("reporters/doc.js", function(module, exports, require){
 /**
  * Module dependencies.
  */
@@ -2768,9 +2768,9 @@ function Doc(runner) {
   });
 }
 
-}); // module: mocha/reporters/doc.js
+}); // module: reporters/doc.js
 
-require.register("mocha/reporters/dot.js", function(module, exports, require){
+require.register("reporters/dot.js", function(module, exports, require){
 /**
  * Module dependencies.
  */
@@ -2838,9 +2838,9 @@ Dot.prototype = new F;
 Dot.prototype.constructor = Dot;
 
 
-}); // module: mocha/reporters/dot.js
+}); // module: reporters/dot.js
 
-require.register("mocha/reporters/html-cov.js", function(module, exports, require){
+require.register("reporters/html-cov.js", function(module, exports, require){
 /**
  * Module dependencies.
  */
@@ -2892,9 +2892,9 @@ function coverageClass(n) {
   return 'terrible';
 }
 
-}); // module: mocha/reporters/html-cov.js
+}); // module: reporters/html-cov.js
 
-require.register("mocha/reporters/html.js", function(module, exports, require){
+require.register("reporters/html.js", function(module, exports, require){
 /**
  * Module dependencies.
  */
@@ -3194,9 +3194,9 @@ function on(el, event, fn) {
   }
 }
 
-}); // module: mocha/reporters/html.js
+}); // module: reporters/html.js
 
-require.register("mocha/reporters/index.js", function(module, exports, require){
+require.register("reporters/index.js", function(module, exports, require){
 exports.Base = require('./base');
 exports.Dot = require('./dot');
 exports.Doc = require('./doc');
@@ -3215,9 +3215,9 @@ exports.JSONCov = require('./json-cov');
 exports.HTMLCov = require('./html-cov');
 exports.JSONStream = require('./json-stream');
 
-}); // module: mocha/reporters/index.js
+}); // module: reporters/index.js
 
-require.register("mocha/reporters/json-cov.js", function(module, exports, require){
+require.register("reporters/json-cov.js", function(module, exports, require){
 /**
  * Module dependencies.
  */
@@ -3371,9 +3371,9 @@ function clean(test) {
   }
 }
 
-}); // module: mocha/reporters/json-cov.js
+}); // module: reporters/json-cov.js
 
-require.register("mocha/reporters/json-stream.js", function(module, exports, require){
+require.register("reporters/json-stream.js", function(module, exports, require){
 /**
  * Module dependencies.
  */
@@ -3438,9 +3438,9 @@ function clean(test) {
   }
 }
 
-}); // module: mocha/reporters/json-stream.js
+}); // module: reporters/json-stream.js
 
-require.register("mocha/reporters/json.js", function(module, exports, require){
+require.register("reporters/json.js", function(module, exports, require){
 /**
  * Module dependencies.
  */
@@ -3534,9 +3534,9 @@ function errorJSON(err) {
   return res;
 }
 
-}); // module: mocha/reporters/json.js
+}); // module: reporters/json.js
 
-require.register("mocha/reporters/landing.js", function(module, exports, require){
+require.register("reporters/landing.js", function(module, exports, require){
 /**
  * Module dependencies.
  */
@@ -3638,9 +3638,9 @@ Landing.prototype = new F;
 Landing.prototype.constructor = Landing;
 
 
-}); // module: mocha/reporters/landing.js
+}); // module: reporters/landing.js
 
-require.register("mocha/reporters/list.js", function(module, exports, require){
+require.register("reporters/list.js", function(module, exports, require){
 /**
  * Module dependencies.
  */
@@ -3709,9 +3709,9 @@ List.prototype = new F;
 List.prototype.constructor = List;
 
 
-}); // module: mocha/reporters/list.js
+}); // module: reporters/list.js
 
-require.register("mocha/reporters/markdown.js", function(module, exports, require){
+require.register("reporters/markdown.js", function(module, exports, require){
 /**
  * Module dependencies.
  */
@@ -3813,9 +3813,9 @@ function Markdown(runner) {
   });
 }
 
-}); // module: mocha/reporters/markdown.js
+}); // module: reporters/markdown.js
 
-require.register("mocha/reporters/min.js", function(module, exports, require){
+require.register("reporters/min.js", function(module, exports, require){
 /**
  * Module dependencies.
  */
@@ -3858,9 +3858,9 @@ Min.prototype = new F;
 Min.prototype.constructor = Min;
 
 
-}); // module: mocha/reporters/min.js
+}); // module: reporters/min.js
 
-require.register("mocha/reporters/nyan.js", function(module, exports, require){
+require.register("reporters/nyan.js", function(module, exports, require){
 /**
  * Module dependencies.
  */
@@ -4126,9 +4126,9 @@ NyanCat.prototype = new F;
 NyanCat.prototype.constructor = NyanCat;
 
 
-}); // module: mocha/reporters/nyan.js
+}); // module: reporters/nyan.js
 
-require.register("mocha/reporters/progress.js", function(module, exports, require){
+require.register("reporters/progress.js", function(module, exports, require){
 /**
  * Module dependencies.
  */
@@ -4226,9 +4226,9 @@ Progress.prototype = new F;
 Progress.prototype.constructor = Progress;
 
 
-}); // module: mocha/reporters/progress.js
+}); // module: reporters/progress.js
 
-require.register("mocha/reporters/spec.js", function(module, exports, require){
+require.register("reporters/spec.js", function(module, exports, require){
 /**
  * Module dependencies.
  */
@@ -4316,9 +4316,9 @@ Spec.prototype = new F;
 Spec.prototype.constructor = Spec;
 
 
-}); // module: mocha/reporters/spec.js
+}); // module: reporters/spec.js
 
-require.register("mocha/reporters/tap.js", function(module, exports, require){
+require.register("reporters/tap.js", function(module, exports, require){
 /**
  * Module dependencies.
  */
@@ -4392,9 +4392,9 @@ function title(test) {
   return test.fullTitle().replace(/#/g, '');
 }
 
-}); // module: mocha/reporters/tap.js
+}); // module: reporters/tap.js
 
-require.register("mocha/reporters/xunit.js", function(module, exports, require){
+require.register("reporters/xunit.js", function(module, exports, require){
 /**
  * Module dependencies.
  */
@@ -4549,9 +4549,9 @@ function cdata(str) {
   return '<![CDATA[' + escape(str) + ']]>';
 }
 
-}); // module: mocha/reporters/xunit.js
+}); // module: reporters/xunit.js
 
-require.register("mocha/runnable.js", function(module, exports, require){
+require.register("runnable.js", function(module, exports, require){
 /**
  * Module dependencies.
  */
@@ -4834,9 +4834,9 @@ Runnable.prototype.run = function(fn){
   }
 };
 
-}); // module: mocha/runnable.js
+}); // module: runnable.js
 
-require.register("mocha/runner.js", function(module, exports, require){
+require.register("runner.js", function(module, exports, require){
 /**
  * Module dependencies.
  */
@@ -5558,9 +5558,9 @@ function extraGlobals() {
  return [];
 }
 
-}); // module: mocha/runner.js
+}); // module: runner.js
 
-require.register("mocha/suite.js", function(module, exports, require){
+require.register("suite.js", function(module, exports, require){
 /**
  * Module dependencies.
  */
@@ -5921,9 +5921,9 @@ Suite.prototype.run = function run() {
   }
 };
 
-}); // module: mocha/suite.js
+}); // module: suite.js
 
-require.register("mocha/test.js", function(module, exports, require){
+require.register("test.js", function(module, exports, require){
 /**
  * Module dependencies.
  */
@@ -5960,9 +5960,9 @@ Test.prototype = new F;
 Test.prototype.constructor = Test;
 
 
-}); // module: mocha/test.js
+}); // module: test.js
 
-require.register("mocha/utils.js", function(module, exports, require){
+require.register("utils.js", function(module, exports, require){
 /**
  * Module dependencies.
  */
@@ -6673,7 +6673,7 @@ exports.stackTraceFilter = function() {
     return stack.join('\n');
   }
 };
-}); // module: mocha/utils.js
+}); // module: utils.js
 // The global object is "self" in Web Workers.
 var global = (function() { return this; })();
 
