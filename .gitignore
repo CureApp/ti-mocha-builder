@@ -21,3 +21,6 @@ examples/alloy/ti-mocha-alloy
 examples/traditional/ti-mocha-traditional
 tmp
 .git
+
+# tmp build file
+_mocha.js

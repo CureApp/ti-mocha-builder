@@ -32,9 +32,10 @@
     "grunt-contrib-jshint": "~0.7.2",
     "grunt-mocha-test": "~0.8.1",
     "grunt-titanium": "^0.2.0",
+    "jit-grunt": "^0.9.1",
     "mocha": "2.2.5",
     "should": "~2.1.1",
-    "wrench": "~1.5.4"
+    "time-grunt": "^1.2.1"
   },
   "engines": {
     "node": ">=0.8"
